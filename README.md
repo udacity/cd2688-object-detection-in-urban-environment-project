@@ -8,9 +8,9 @@ In this project, you will learn how to train an object detection model using the
 
 ## Installation
 
-<INSERT SAGEMAKER LAUNCH INSTRUCTIONS>
+Refer to the **Setup Instructions** page in the classroom to setup the Sagemaker Notebook instance required for this project.
 
-Once you have accessed the Sagemaker console, you can launch a notebook instance and clone this repository. The `conda_tensorflow2_p38` kernel contains most of the required packages for this project. The notebooks contain lines for manual installation when required.
+>Note: The `conda_tensorflow2_p38` kernel contains most of the required packages for this project. The notebooks contain lines for manual installation when required.
 
 ## Usage
 
@@ -18,7 +18,10 @@ This repository contains two notebooks:
 * [1_train_model](1_model_training/1_train_model.ipynb): this notebook is used to launch a training job and create tensorboard visualizations. 
 * [2_deploy_model](2_run_inference/2_deploy_model.ipynb): this notebook is used to deploy your model, run inference on test data and create a gif similar to the one above.
 
-Each notebook contains the instructions for running the code, as well the requirements for the writeup. Only the first notebook requires a write up. 
+First, run `1_train_model.ipynb` to train your model. Once the training job is complete, run `2_deploy_model.ipynb` to deploy your model and generate the animation.
+
+Each notebook contains the instructions for running the code, as well the requirements for the writeup. 
+>Note: Only the first notebook requires a write up. 
 
 ## Useful links
 * The Tensorflow Object Detection API tutorial is a great resource to debug your code. This [section](https://tensorflow-object-detection-api-tutorial.readthedocs.io/en/latest/training.html#configure-the-training-pipeline) in particular will teach you how to edit the `pipeline.config` file to update
