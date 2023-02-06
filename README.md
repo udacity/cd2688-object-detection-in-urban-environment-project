@@ -10,7 +10,7 @@ In this project, you will learn how to train an object detection model using the
 
 Refer to the **Setup Instructions** page in the classroom to setup the Sagemaker Notebook instance required for this project.
 
->Note: The `conda_tensorflow2_p38` kernel contains most of the required packages for this project. The notebooks contain lines for manual installation when required.
+>Note: The `conda_tensorflow2_p310` kernel contains most of the required packages for this project. The notebooks contain lines for manual installation when required.
 
 ## Usage
 
