@@ -21,7 +21,7 @@ RUN apt-get update && apt-get install -y \
     libgl1-mesa-dev \
     wget
 
-# Copy this version of of the model garden into the image
+# Copy this version of the model garden into the image
 COPY models/research/object_detection /home/tensorflow/models/research/object_detection 
 
 # Compile protobuf configs
