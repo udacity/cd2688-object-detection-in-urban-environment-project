@@ -22,6 +22,7 @@ RUN (cd /home/tensorflow/models/research/ && protoc object_detection/protos/*.pr
 WORKDIR /home/tensorflow/models/research/
 
 RUN cp object_detection/packages/tf2/setup.py ./
+RUN sed -i 's/pillow/pillow==9.5/g' setup.py
 ENV PATH="/home/tensorflow/.local/bin:${PATH}"
 RUN python -m pip install -U pip
 RUN python -m pip install .
