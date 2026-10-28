@@ -23,6 +23,27 @@ First, run `1_train_model.ipynb` to train your model. Once the training job is c
 Each notebook contains the instructions for running the code, as well the requirements for the writeup. 
 >Note: Only the first notebook requires a write up. 
 
+## Troubleshooting
+
+**SageMaker SDK errors** (for example `ImportError: cannot import name 'TensorFlowModel'` or `No module named 'sagemaker.estimator'`)
+
+The notebooks need the SageMaker Python SDK **v2**. SDK v3 removed or changed the APIs they use. Run the install cell at the top of the notebook, restart the kernel (**Kernel > Restart**), and run the notebook from the top again. The version check cell must print a version that starts with `2.`. If your copy of the repository doesn't have this install cell, run `git pull` in the repository folder to get the latest version.
+
+**S3 `AccessDenied` when launching the training job**
+
+`tensorboard_s3_prefix` must point to a bucket in your own AWS account. By default the notebook uses your SageMaker default bucket.
+
+**Deployment fails or doesn't finish**
+
+`2_deploy_model.ipynb` creates its own endpoint on an `ml.g4dn.xlarge` instance, which usually takes 5 to 15 minutes. If it fails or times out:
+* check that `model_artifact` is the full S3 path of the `model.tar.gz` produced by a **Completed** training job
+* check that your quota for `ml.g4dn.xlarge for endpoint usage` is at least 1 (**Service Quotas > Amazon SageMaker** in the AWS console)
+* read the failure reason under **Inference > Endpoints** and the CloudWatch logs of the endpoint
+
+Delete the failed endpoint before you try again.
+
+**Remember to delete your endpoint** when you are done (last cell of `2_deploy_model.ipynb`). Endpoints are billed for every hour they run.
+
 ## Useful links
 * The Tensorflow Object Detection API tutorial is a great resource to debug your code. This [section](https://tensorflow-object-detection-api-tutorial.readthedocs.io/en/latest/training.html#configure-the-training-pipeline) in particular will teach you how to edit the `pipeline.config` file to update
 your training job.
