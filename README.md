@@ -25,9 +25,11 @@ Each notebook contains the instructions for running the code, as well the requir
 
 ## Troubleshooting
 
-**SageMaker SDK errors** (for example `ImportError: cannot import name 'TensorFlowModel'` or `No module named 'sagemaker.estimator'`)
+**SageMaker SDK errors** (for example `No module named 'sagemaker.estimator'`, `module 'sagemaker' has no attribute 'get_execution_role'` or `No module named 'sagemaker.train'`)
 
-The notebooks need the SageMaker Python SDK **v2**. SDK v3 removed or changed the APIs they use. Run the install cell at the top of the notebook, restart the kernel (**Kernel > Restart**), and run the notebook from the top again. The version check cell must print a version that starts with `2.`. If your copy of the repository doesn't have this install cell, run `git pull` in the repository folder to get the latest version.
+The notebooks use the SageMaker Python SDK **v3** (`ModelTrainer` for training, and the `Model`, `EndpointConfig` and `Endpoint` resources from `sagemaker.core` for deployment). They need Python 3.10 or later (the default `conda_python3` kernel on SageMaker notebook instances). Run the install cell at the top of the notebook, restart the kernel (**Kernel > Restart**), and run the notebook from the top again. The version check cell must print a version that starts with `3.`.
+
+`No module named 'sagemaker.estimator'` or `TensorFlowModel` errors mean that you are running an older copy of the notebooks, written for SDK v2. Run `git pull` in the repository folder to get the latest version.
 
 **S3 `AccessDenied` when launching the training job**
 
@@ -40,7 +42,7 @@ The notebooks need the SageMaker Python SDK **v2**. SDK v3 removed or changed th
 * check that your quota for `ml.g4dn.xlarge for endpoint usage` is at least 1 (**Service Quotas > Amazon SageMaker** in the AWS console)
 * read the failure reason under **Inference > Endpoints** and the CloudWatch logs of the endpoint
 
-Delete the failed endpoint before you try again.
+Delete the failed endpoint, as well as its endpoint configuration and model, before you try again.
 
 **Remember to delete your endpoint** when you are done (last cell of `2_deploy_model.ipynb`). Endpoints are billed for every hour they run.
 
