@@ -38,7 +38,24 @@ import PIL.ImageFont as ImageFont
 import six
 from six.moves import range
 from six.moves import zip
-import tensorflow as tf
+# TensorFlow is only used by the tensor-based helpers further down this file
+# (draw_bounding_boxes_on_image_tensors, eval-dict and summary helpers). The
+# inference notebook only calls visualize_boxes_and_labels_on_image_array, which
+# is pure PIL/numpy and does not need TensorFlow. Import it lazily so this module
+# still loads on a kernel without TensorFlow; any tf-based function will raise a
+# clear error only if it is actually called.
+try:
+    import tensorflow as tf
+except ModuleNotFoundError:
+    class _TensorFlowNotInstalled:
+        def __getattr__(self, name):
+            raise ModuleNotFoundError(
+                "This visualization_utils function requires TensorFlow, which is not "
+                "installed in this kernel. Install it (pip install tensorflow) or use a "
+                "TensorFlow kernel. The inference notebook's "
+                "visualize_boxes_and_labels_on_image_array does not need TensorFlow."
+            )
+    tf = _TensorFlowNotInstalled()
 
 _TITLE_LEFT_MARGIN = 10
 _TITLE_TOP_MARGIN = 10
